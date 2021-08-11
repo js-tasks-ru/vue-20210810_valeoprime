@@ -1,4 +1,4 @@
-// import { createApp } from './vendor/vue.esm-browser.js';
+import { createApp } from './vendor/vue.esm-browser.js';
 
 // From https://jsonplaceholder.typicode.com/comments
 const emails = [
@@ -28,5 +28,32 @@ const emails = [
   'Jeffery@juwan.us',
   'Isaias_Kuhic@jarrett.net',
 ];
+
+// Создайте Vue приложение
+const RootComponent = {
+  template: `<div class="container">
+        <div class="form-group">
+          <input v-model="query" type="search" />
+        </div>
+        <ul>
+          <li v-for="email in filteredArray" v-bind:class="[email.matches ? 'marked' : '']">{{email.email}}</li>
+        </ul>
+      </div>`,
+  data() {
+    return {
+      query: null,
+    };
+  },
+  computed: {
+    filteredArray() {
+      let filteredArray = emails.map((email) => {
+        return email.indexOf(this.query) >= 0 ? { email, matches: true } : { email, matches: false };
+      });
+      return filteredArray;
+    },
+  },
+};
+const app = createApp(RootComponent);
+app.mount('#app');
 
 // Требуется создать Vue приложение

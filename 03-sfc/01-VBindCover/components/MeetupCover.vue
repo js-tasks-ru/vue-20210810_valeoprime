@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     imageUrl() {
-      return this.image ? `url(${this.image})` : 'url(--default-cover)';
+      return this.image ? `url(${this.image})` : 'var(--default-cover)';
     },
   },
 };
